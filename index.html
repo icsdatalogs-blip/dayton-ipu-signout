@@ -186,11 +186,18 @@
         const asset = scanInput.value.trim();
         if (!asset) return;
 
-        saveScan({
-          asset: asset,
-          location: "dayton",
-          timestamp: new Date().toISOString()
-        });
+       fetch("https://script.google.com/macros/s/AKfycbz-5s9gsaeqb4suMLgR8fSj6iND-Kjy_hJMsQUBZjK_TkFZ3STNEKVYhXNul9QNPZcmrQ/exec", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    asset: asset,
+    location: "Dayton IPU",
+    timestamp: new Date().toISOString()
+  })
+});
+
 
         scanInput.classList.add("success");
         setTimeout(() => scanInput.classList.remove("success"), 200);
