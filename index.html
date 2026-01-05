@@ -186,15 +186,20 @@
         const asset = scanInput.value.trim();
         if (!asset) return;
 
-     fetch("https://script.google.com/macros/s/AKfycbz-5s9gsaeqb4suMLgR8fSj6iND-Kjy_hJMsQUBZjK_TkFZ3STNEKVYhXNul9QNPZcmrQ/exec", {
+   const scan = {
+  asset: asset,
+  location: "Dayton IPU",
+  timestamp: new Date().toISOString()
+};
+
+saveScan(scan);
+
+fetch("https://script.google.com/macros/s/AKfycbz-5s9gsaeqb4suMLgR8fSj6iND-Kjy_hJMsQUBZjK_TkFZ3STNEKVYhXNul9QNPZcmrQ/exec", {
   method: "POST",
   mode: "no-cors",
-  body: JSON.stringify({
-    asset: asset,
-    location: "Dayton IPU",
-    timestamp: new Date().toISOString()
-  })
+  body: JSON.stringify(scan)
 });
+
 
 
 
