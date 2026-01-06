@@ -1,84 +1,133 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Ohio’s Hospice · IPU Equipment Sign Out</title>
+  <title>ICS · Ohio’s Hospice · IPU Equipment Sign Out</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
     :root {
-      --teal-main: #1f9bb4;
-      --teal-soft: #6fc6d6;
-      --leaf-green: #9cc63b;
-      --text-main: #374151;
+      --blue-main: #0b5fa5;
+      --blue-soft: rgba(11, 95, 165, 0.18);
+      --orange-main: #f47c20;
+      --orange-soft: rgba(244, 124, 32, 0.22);
+      --text-main: #1f2937;
       --text-muted: #6b7280;
-      --bg-white: #ffffff;
+      --bg-main: #f8fafc;
+      --card-bg: rgba(255,255,255,0.88);
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text-main);
-      background: var(--bg-white);
+      background: linear-gradient(
+        to bottom,
+        rgba(244,124,32,0.12),
+        rgba(11,95,165,0.08),
+        var(--bg-main)
+      );
+      min-height: 100vh;
     }
 
+    /* HEADER */
     header {
-      padding: 1.5rem 1.5rem 2.5rem;
       position: relative;
+      padding: 2rem 1.5rem 4rem;
+      overflow: hidden;
     }
 
     header h1 {
       margin: 0;
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--teal-main);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--blue-main);
     }
 
     header span {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
     }
 
-    .wave {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 80px;
-      background: url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90'>\
-<path fill='%236fc6d6' fill-opacity='0.25' d='M0,40 C120,20 240,60 360,55 480,50 600,25 720,35 840,45 960,80 1080,75 1200,70 1320,45 1440,50 L1440,0 L0,0 Z'/>\
-<path fill='%239cc63b' fill-opacity='0.18' d='M0,60 C180,50 360,80 540,70 720,60 900,40 1080,45 1260,50 1380,65 1440,60 L1440,0 L0,0 Z'/>\
+    /* TOP WAVE */
+   .wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'>\
+<defs>\
+<linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='0%'>\
+<stop offset='0%' stop-color='%23f47c20' stop-opacity='0.35'/>\
+<stop offset='55%' stop-color='%23f47c20' stop-opacity='0.25'/>\
+<stop offset='75%' stop-color='%230b5fa5' stop-opacity='0.25'/>\
+<stop offset='100%' stop-color='%230b5fa5' stop-opacity='0.35'/>\
+</linearGradient>\
+</defs>\
+<path fill='url(%23grad)' d='M0,40 C120,20 240,60 360,55 480,50 600,25 720,35 840,45 960,80 1080,75 1200,70 1320,45 1440,50 L1440,0 L0,0 Z'/>\
 </svg>");
-      background-size: cover;
-    }
+  background-size: cover;
+  pointer-events: none;
+}
 
+
+    /* MAIN LAYOUT */
     main {
-      max-width: 720px;
-      margin: auto;
-      padding: 3rem 1.5rem 2rem;
+      display: flex;
+      justify-content: center;
+      padding: 3.5rem 1.5rem 3rem;
     }
 
+    .card {
+      width: 100%;
+      max-width: 560px;
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 2.5rem 2rem 2.2rem;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.08);
+      backdrop-filter: blur(6px);
+      text-align: center;
+    }
+
+    /* INPUT */
     input {
       width: 100%;
-      padding: 1.1rem;
-      font-size: 1.7rem;
+      padding: 1.2rem;
+      font-size: 1.4rem;
       border-radius: 14px;
-      border: 2px solid var(--teal-soft);
+      border: 2px solid rgba(11,95,165,0.35);
       outline: none;
       text-align: center;
-      transition: background 0.15s ease, border-color 0.15s ease;
+      transition: all 0.18s ease;
+      background: white;
+    }
+
+    input:focus {
+      border-color: var(--blue-main);
+      box-shadow: 0 14px 40px rgba(11,95,165,0.18);
+      transform: translateY(-1px);
     }
 
     input.success {
-      background: #f0fdf4;
-      border-color: var(--leaf-green);
+      background: linear-gradient(
+        135deg,
+        rgba(11,95,165,0.18),
+        rgba(244,124,32,0.16)
+      );
+      border-color: var(--orange-main);
     }
 
     .link {
-      margin-top: 1rem;
-      font-size: 0.85rem;
-      color: var(--teal-main);
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: var(--blue-main);
       cursor: pointer;
       text-align: right;
     }
@@ -87,14 +136,16 @@
       display: none;
     }
 
+    /* HISTORY */
     .day {
       margin-bottom: 2rem;
+      text-align: left;
     }
 
     .date {
       font-size: 0.9rem;
       font-weight: 600;
-      color: var(--teal-main);
+      color: var(--blue-main);
       margin-bottom: 0.6rem;
     }
 
@@ -103,7 +154,7 @@
       justify-content: space-between;
       font-family: ui-monospace, Menlo, monospace;
       font-size: 0.9rem;
-      padding: 0.3rem 0;
+      padding: 0.35rem 0;
     }
 
     .time {
@@ -112,9 +163,10 @@
     }
 
     footer {
-      padding: 1.5rem;
+      padding: 2rem 1.5rem 2.5rem;
       font-size: 0.75rem;
       color: var(--text-muted);
+      text-align: left;
     }
   </style>
 </head>
@@ -122,29 +174,31 @@
 <body>
 
   <header>
-    <h1>Ohio’s Hospice</h1>
+    <h1>OHI · Innovative Care Solutions</h1>
     <span>Dayton IPU · Equipment Sign Out</span>
     <div class="wave"></div>
   </header>
 
   <main>
+    <div class="card">
 
-    <section id="scanView">
-      <input
-        id="scanInput"
-        autofocus
-        autocomplete="off"
-        placeholder="Scan equipment asset number"
-      />
-      <div class="link" onclick="showHistory()">View sign-out history →</div>
-    </section>
+      <section id="scanView">
+        <input
+          id="scanInput"
+          autofocus
+          autocomplete="off"
+          placeholder="Scan equipment asset number"
+        />
+        <div class="link" onclick="showHistory()">View sign-out history →</div>
+      </section>
 
-    <section id="historyView" class="hidden">
-      <div class="link" onclick="showScan()">← Back to scanner</div>
-      <div id="history">Loading history…</div>
-      <div class="link" onclick="clearHistory()">Clear test data</div>
-    </section>
+      <section id="historyView" class="hidden">
+        <div class="link" onclick="showScan()">← Back to scanner</div>
+        <div id="history">Loading history…</div>
+        <div class="link" onclick="clearHistory()">Clear test data</div>
+      </section>
 
+    </div>
   </main>
 
   <footer>
@@ -186,23 +240,20 @@
         const asset = scanInput.value.trim();
         if (!asset) return;
 
-   const scan = {
-  asset: asset,
-  location: "Dayton IPU",
-  timestamp: new Date().toISOString()
-};
+        const scan = {
+          asset: asset,
+          location: "Dayton IPU",
+          timestamp: new Date().toISOString()
+        };
 
-saveScan(scan);
-loadHistory();
+        saveScan(scan);
+        loadHistory();
 
-fetch("https://script.google.com/macros/s/AKfycbz-5s9gsaeqb4suMLgR8fSj6iND-Kjy_hJMsQUBZjK_TkFZ3STNEKVYhXNul9QNPZcmrQ/exec", {
-  method: "POST",
-  mode: "no-cors",
-  body: JSON.stringify(scan)
-});
-
-
-
+        fetch("https://script.google.com/macros/s/AKfycbz-5s9gsaeqb4suMLgR8fSj6iND-Kjy_hJMsQUBZjK_TkFZ3STNEKVYhXNul9QNPZcmrQ/exec", {
+          method: "POST",
+          mode: "no-cors",
+          body: JSON.stringify(scan)
+        });
 
         scanInput.classList.add("success");
         setTimeout(() => scanInput.classList.remove("success"), 200);
@@ -257,3 +308,4 @@ fetch("https://script.google.com/macros/s/AKfycbz-5s9gsaeqb4suMLgR8fSj6iND-Kjy_h
 
 </body>
 </html>
+
